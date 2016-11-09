@@ -1,0 +1,26 @@
+/* The tic tac toe clothes */
+
+h1 {
+  text-align: center;
+}
+
+.board {
+  width: 330px;
+  height: 330px;
+  overflow: auto;
+  position: relative;
+  left: 30%;
+}
+
+.box {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  position: relative;
+  padding: 0px;
+  margin: 1px 2px;
+  border-radius: 5px;
+  background-image: url( "images/pineapple_house.jpg" );
+  background-size: cover;
+}
