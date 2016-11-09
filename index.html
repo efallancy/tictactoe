@@ -1,26 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <script src="jquery.js"></script>
-  <title>Tic Tac Toe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="jquery.js"></script>
+
+    <title>Tic Tac Toe</title>
+
+    <!-- Sweeet Alert -->
+    <script src="https://cdn.jsdelivr.net/g/sweetalert2@6.0.1(sweetalert2.min.js+sweetalert2.js)"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/g/sweetalert2@6.0.1(sweetalert2.min.css+sweetalert2.css)">
+
 </head>
+
 <body>
-  <h1>Tic Tac Toe</h1>
-  <div class="board">
-    <div class="box" id="box1" isclick="false" player=""></div>
-    <div class="box" id="box2" isclick="false" player=""></div>
-    <div class="box" id="box3" isclick="false" player=""></div>
-    <div class="box" id="box4" isclick="false" player=""></div>
-    <div class="box" id="box5" isclick="false" player=""></div>
-    <div class="box" id="box6" isclick="false" player=""></div>
-    <div class="box" id="box7" isclick="false" player=""></div>
-    <div class="box" id="box8" isclick="false" player=""></div>
-    <div class="box" id="box9" isclick="false" player=""></div>
-  </div>
-  <script src="main.js"></script>
+    <h1>Tic Tac Toe</h1>
+
+    <!-- TODO: Create the character selection -->
+    <!-- TODO: Redo layout to cater for option layout -->
+    <!-- TODO: Planning on reset game option -->
+    <div class="overlay" id="billboard">
+        <div class="overlay-image-box">
+            <img class="overlay-image" src="images/pineapple_house.jpg" alt="Pineapple house">
+            <div class="show_winner_msg" id="winner_msg"></div>
+        </div>
+    </div>
+
+    <div class="scoreboard">
+    <div class="userscoreboard">
+        <p>Your Scoreboard</p>
+        <div id="userPlayer">Win: 0</div>
+    </div>
+
+    <div class="opponentscoreboard">
+        <p>Opponent Scoreboard</p>
+        <div id="opponentPlayer">Win: 0</div>
+    </div>
+    </div>
+
+    <div class="board" id="board">
+        <div class="box" id="box1" isclick="false" player=""></div>
+        <div class="box" id="box2" isclick="false" player=""></div>
+        <div class="box" id="box3" isclick="false" player=""></div>
+        <div class="box" id="box4" isclick="false" player=""></div>
+        <div class="box" id="box5" isclick="false" player=""></div>
+        <div class="box" id="box6" isclick="false" player=""></div>
+        <div class="box" id="box7" isclick="false" player=""></div>
+        <div class="box" id="box8" isclick="false" player=""></div>
+        <div class="box" id="box9" isclick="false" player=""></div>
+    </div>
+
+
+
+    <!-- Custom script -->
+    <script src="main.js"></script>
 </body>
+
 </html>

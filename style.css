@@ -1,26 +1,73 @@
 /* The tic tac toe clothes */
 
+body {
+  font-family: monospace;
+}
+
 h1 {
   text-align: center;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow: scroll;
+  display: none;
+  z-index: 100;
+}
+
+.overlay-image-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.show_winner_msg {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
+
 .board {
-  width: 330px;
-  height: 330px;
+  width: 520px;
+  height: 520px;
   overflow: auto;
   position: relative;
-  left: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .box {
   border: 1px solid black;
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
   display: inline-block;
   position: relative;
   padding: 0px;
-  margin: 1px 2px;
+  margin: 2px auto;
   border-radius: 5px;
-  background-image: url( "images/pineapple_house.jpg" );
   background-size: cover;
+  background-color: white;
+}
+
+.scoreboard {
+  position: fixwd;
+  overflow: auto;
+  clear: both;
+  width: 100%;
+}
+
+.userscoreboard {
+  float: left;
+  margin-left: 100px;
+}
+
+.opponentscoreboard {
+  float: right;
+  margin-right: 150px;
 }
