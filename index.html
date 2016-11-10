@@ -17,41 +17,89 @@
 </head>
 
 <body>
-    <h1>Tic Tac Toe</h1>
+    <h1>Tic Tac Pants</h1>
 
     <!-- TODO: Create the character selection -->
     <!-- TODO: Redo layout to cater for option layout -->
     <!-- TODO: Planning on reset game option -->
     <div class="overlay" id="billboard">
         <div class="overlay-image-box">
-            <img class="overlay-image" src="images/pineapple_house.jpg" alt="Pineapple house">
+            <img id="showcase" class="overlay-image" src="images/pineapple_house.jpg" alt="Pineapple house">
             <div class="show_winner_msg" id="winner_msg"></div>
         </div>
     </div>
 
     <div class="scoreboard">
-    <div class="userscoreboard">
-        <p>Your Scoreboard</p>
-        <div id="userPlayer">Win: 0</div>
+
+        <!-- Player scoreboard -->
+        <div class="userscoreboard">
+            <p>Your Scoreboard</p>
+            <div id="userPlayer">Win: 0</div>
+            <br />
+            <div class="character">
+              <div class="character_box" id="spongebob" selected="false">
+                <img src="images/spongebob.png" alt="Spongebob Squarepants" title="Spongebob Squarepants">
+              </div>
+              <div class="character_box" id="patrick" selected="false">
+                <img src="images/patrick.jpg" alt="Patrick Star" title="Patrick Star">
+              </div>
+              <div class="character_box" id="squidward" selected="false">
+                <img src="images/squidward.jpg" alt="Squidward The Octopus" title="Squidward">
+              </div>
+              <div class="character_box" id="plankton" selected="false">
+                <img src="images/plankton.jpg" alt="Plankton" title="Plankton">
+              </div>
+              <div class="character_box" id="jerry" selected="false">
+                <img src="images/jerry.png" alt="Jerry Snail" title="Jerry">
+              </div>
+              <div class="character_box" id="mrkrab" selected="false">
+                <img src="images/mr_krab.jpg" alt="Mr. Krab" title="Mr. Krab">
+              </div>
+            </div>
+        </div>
+
+        <!-- The magnificient board -->
+        <div class="board" id="board">
+            <div class="box" id="box1" isclick="false" player=""></div>
+            <div class="box" id="box2" isclick="false" player=""></div>
+            <div class="box" id="box3" isclick="false" player=""></div>
+            <div class="box" id="box4" isclick="false" player=""></div>
+            <div class="box" id="box5" isclick="false" player=""></div>
+            <div class="box" id="box6" isclick="false" player=""></div>
+            <div class="box" id="box7" isclick="false" player=""></div>
+            <div class="box" id="box8" isclick="false" player=""></div>
+            <div class="box" id="box9" isclick="false" player=""></div>
+        </div>
+
+        <!-- Opponent Scoreboard -->
+        <div class="opponentscoreboard">
+            <p>Opponent Scoreboard</p>
+            <div id="opponentPlayer">Win: 0</div>
+            <br />
+            <div class="character">
+              <div class="character_box" id="spongebob_opponent" selected="false">
+                <img src="images/spongebob.png" alt="Spongebob Squarepants" title="Spongebob Squarepants">
+              </div>
+              <div class="character_box" id="patrick_opponent" selected="false">
+                <img src="images/patrick.jpg" alt="Patrick Star" title="Patrick Star">
+              </div>
+              <div class="character_box" id="squidward_opponent" selected="false">
+                <img src="images/squidward.jpg" alt="Squidward The Octopus" title="Squidward">
+              </div>
+              <div class="character_box" id="plankton_opponent" selected="false">
+                <img src="images/plankton.jpg" alt="Plankton" title="Plankton">
+              </div>
+              <div class="character_box" id="jerry_opponent" selected="false">
+                <img src="images/jerry.png" alt="Jerry Snail" title="Jerry">
+              </div>
+              <div class="character_box" id="mrkrab_opponent" selected="false">
+                <img src="images/mr_krab.jpg" alt="Mr. Krab" title="Mr. Krab">
+              </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="opponentscoreboard">
-        <p>Opponent Scoreboard</p>
-        <div id="opponentPlayer">Win: 0</div>
-    </div>
-    </div>
-
-    <div class="board" id="board">
-        <div class="box" id="box1" isclick="false" player=""></div>
-        <div class="box" id="box2" isclick="false" player=""></div>
-        <div class="box" id="box3" isclick="false" player=""></div>
-        <div class="box" id="box4" isclick="false" player=""></div>
-        <div class="box" id="box5" isclick="false" player=""></div>
-        <div class="box" id="box6" isclick="false" player=""></div>
-        <div class="box" id="box7" isclick="false" player=""></div>
-        <div class="box" id="box8" isclick="false" player=""></div>
-        <div class="box" id="box9" isclick="false" player=""></div>
-    </div>
 
 
 

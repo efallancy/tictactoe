@@ -233,7 +233,7 @@ var showDraw = function () {
 };
 
 var displayBillboard = function ( imgDisplay ) {
-  $( "img" ).attr( "src", imgDisplay );
+  $( "#showcase" ).attr( "src", imgDisplay );
   $( "#winner_msg" ).html( winner + " win!" );
 
   if ( isDraw ) {

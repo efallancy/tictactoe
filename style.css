@@ -37,9 +37,9 @@ h1 {
   width: 520px;
   height: 520px;
   overflow: auto;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
+
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .box {
@@ -56,18 +56,38 @@ h1 {
 }
 
 .scoreboard {
-  position: fixwd;
+
   overflow: auto;
-  clear: both;
   width: 100%;
 }
 
-.userscoreboard {
+.opponentscoreboard, .userscoreboard, .board {
   float: left;
-  margin-left: 100px;
+  margin: auto 45px;
 }
 
-.opponentscoreboard {
-  float: right;
-  margin-right: 150px;
+.character {
+  width: 220px;
+  height: 330px;
+
+  padding: 2px 2px;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}
+
+.character_box {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin: 2px 2px;
+  background-color: white;
+}
+
+.character_box img {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid salmon;
 }
