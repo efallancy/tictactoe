@@ -271,7 +271,21 @@ var resetGame = function () {
 
 };
 
+// ------------- Select character -----------------
+var characterSelected = function () {
+  var selected = false;
+
+  var userSelection = $( ".character_box.user" );
+  var opponentSelection = $( ".character_box.opponent" );
+
+  
+
+  return selected;
+}
+
+
 // ------------- Release the Kraken ---------------
 
 // Set the event listener to the box
+characterSelected();
 $( ".box" ).on( "click", init );
