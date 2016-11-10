@@ -69,7 +69,7 @@ var loser = {
                 "Such a loser!",
                 "Great job, you are on the losing side",
                 "Because of you, we are losing.",
-                "Don't worry because you might(?) do better" ]
+                "You are such a nightmare" ]
 };
 
 
@@ -320,7 +320,7 @@ var displayBillboard = function ( imgDisplay, msgDisplay ) {
   if ( isDraw ) {
     $( "#winner_msg" ).html( "It's a draw!" );
   }
-  
+
   $( "#billboard" ).fadeIn( 500 );
 
   $( "#billboard" ).on( "click", function() {
