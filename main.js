@@ -11,10 +11,67 @@ var userScore = 0;
 var opponentScore = 0;
 var hasWinner = false;
 var isDraw = false;
+var playerCharacter = "";
+var opponentCharacter = "";
+var playerCharacterImage = "";
+var opponentCharacterImage = "donald_trump.jpeg"; // just go against him for now
+var loserImg = "";
+var loserMessage = "";
+var winnerImg = "";
+var winnerMessage = "";
 
 // TODO: create functionality to choose character
-// TODO: create arrays of winning image display and text display (consider object)
 // TODO: if time allows, create another AI
+
+var avatar = {
+  spongebob: "spongebob.png",
+  patrick: "patrick.jpg",
+  squidward: "squidward.jpg",
+  plankton: "plankton.jpg",
+  jerry: "jerry.png",
+  mrkrab: "mr_krab.jpg"
+};
+
+var characters = {
+  spongebob: {
+                winning_images: [ "spongebob_win.gif", "spongebob.gif" ],
+                winning_text: [ "You beat that shit!", "It appears you won proudly!" ]
+             },
+  patrick: {
+                winning_images: [ "patrick.gif", "patrick_win.gif", "patrick_happy.gif" ],
+                winning_text: [ "You've nail it!", "Well done!", "Great job!" ]
+            },
+  squidward: {
+                winning_images: [ "squidward.gif", "squidward_win.gif" ],
+                winning_text: [ "Oh yea! You won.", "Victory is yours to claim!" ]
+             },
+  plankton: {
+               winning_images: [ "plankton_yes.gif", "plankton_evil_laugh.gif" ],
+               winning_text: [ "You pretty sure scrap that loser.", "Great job on the victory!" ]
+             },
+  jerry: {
+            winning_images: [ "jerry_win.gif", "jerry.gif" ],
+            winning_text: [ "Meow...( as in you win! )", "Woof...( as in you just won! )" ]
+          },
+  mrkrab: {
+             winning_images: [ "mr_krab_but.gif", "mr_krab_wipe.gif" ],
+             winning_text: [ "Money money winner money!", "Biggie dollar win!" ]
+          }
+};
+
+var loser = {
+  loser_images: [ "donald_bye.gif",
+                  "donald_fire.gif",
+                  "donald_happy_shock.gif",
+                  "hillary_disappointed.gif",
+                  "hillary_horrified.gif" ],
+  loser_text: [ "Oh my! Are you gonna quit?",
+                "Such a loser!",
+                "Great job, you are on the losing side",
+                "Because of you, we are losing.",
+                "Don't worry because you might(?) do better" ]
+};
+
 
 // ------------- Response ---------------
 // Set the click response
@@ -47,7 +104,7 @@ var playerAction = function ( currentElement ) {
   $element.attr( "isclick", "true" );
 
   $element.css( {
-    backgroundImage: "url( images/patrick.jpg )",
+    backgroundImage: "url( images/"+ playerCharacterImage + " )",
     backgroundSize: "cover"
   } );
 
@@ -77,8 +134,9 @@ var computerAction = function () {
     // Set to notify already clicked
     $computerBox.attr( "isclick", "true" );
 
+    console.log( opponentCharacterImage );
     $computerBox.css( {
-      backgroundImage: "url( images/spongebob.png )",
+      backgroundImage: "url( images/" + opponentCharacterImage + " )",
       backgroundSize: "cover"
     } );
 
@@ -99,17 +157,37 @@ var computerAction = function () {
 // ------------- Triggers ---------------
 
 var init = function () {
-  if ( currentPlayer === "" ) {
-    currentPlayer = user;
-  }
-  else if ( currentPlayer === user ) {
-    currentPlayer = opponent;
+
+  if ( characterSelected() ) {
+    if ( currentPlayer === "" ) {
+      currentPlayer = user;
+    }
+    else if ( currentPlayer === user ) {
+      currentPlayer = opponent;
+    }
+    else {
+      currentPlayer = user;
+    }
+
+    // Remove the event character selection
+    $( ".character_box.user" ).off();
+
+    // Get the character and set the avater
+    playerCharacter = getSelectedCharacter();
+    setPlayerAvatar();
+
+    // Select the winning text and images
+    selectRandomWinnerText();
+
+    // Select the loser text and images
+    selectRandomLoserText();
+
+    setClickResponse( event, this );
   }
   else {
-    currentPlayer = user;
+    // Alert to select character
+    alert( "Please select the character of your choice" );
   }
-
-  setClickResponse( event, this );
 
 };
 
@@ -209,19 +287,22 @@ var showWinner = function () {
   // Evaluate the winner/result
   var msg = evaluateWinner();
   var imgDisplay = "";
+  var msgDisplay = "";
 
   if ( hasWinner ) {
     $( ".box" ).off();
 
     if ( msg === user ) {
-      imgDisplay = "images/patrick_happy.gif";
+      imgDisplay = winnerImg;
+      msgDisplay = winnerMessage;
     }
     else if ( msg === opponent ) {
-      imgDisplay = "images/spongebob_win.gif";
+      imgDisplay = loserImg;
+      msgDisplay = loserMessage;
     }
 
     // Display that annoying billbord
-    displayBillboard( imgDisplay );
+    displayBillboard( imgDisplay, msgDisplay );
   }
 };
 
@@ -229,16 +310,17 @@ var showDraw = function () {
   imgDisplay = "images/pineapple_house.jpg";
 
   // Display that annoying billboard
-  displayBillboard( imgDisplay );
+  displayBillboard( imgDisplay, "" );
 };
 
-var displayBillboard = function ( imgDisplay ) {
+var displayBillboard = function ( imgDisplay, msgDisplay ) {
   $( "#showcase" ).attr( "src", imgDisplay );
-  $( "#winner_msg" ).html( winner + " win!" );
+  $( "#winner_msg" ).html( msgDisplay );
 
   if ( isDraw ) {
     $( "#winner_msg" ).html( "It's a draw!" );
   }
+  
   $( "#billboard" ).fadeIn( 500 );
 
   $( "#billboard" ).on( "click", function() {
@@ -247,9 +329,6 @@ var displayBillboard = function ( imgDisplay ) {
   } );
 };
 
-var winnerImage = function () {
-
-};
 
 // ------------- Reset ---------------
 
@@ -278,14 +357,70 @@ var characterSelected = function () {
   var userSelection = $( ".character_box.user" );
   var opponentSelection = $( ".character_box.opponent" );
 
-  
+  for ( var i = 0; i < userSelection.length; i++ ) {
+    if ( userSelection.eq( i ).attr( "isselected" ) === "true" ) {
+      selected = true;
+      break;
+    }
+  }
 
   return selected;
+};
+
+var getSelectedCharacter = function () {
+  var potentialCharacter = $( ".character_box.user" );
+  var character = "";
+
+  for ( var i = 0; i < potentialCharacter.length; i++ ) {
+    if ( potentialCharacter.eq( i ).attr( "isselected" ) === "true" ) {
+      character = potentialCharacter.eq( i ).attr( "id" );
+    }
+  }
+
+  return character;
+};
+
+var selectRandomLoserText = function () {
+  var loserImgTxtLength = loser.loser_images.length;
+  var luckyLoser = Math.floor( Math.random() * loserImgTxtLength );
+
+  loserImg = "images/" + loser.loser_images[ luckyLoser ];
+  loserMessage = loser.loser_text[ luckyLoser ];
+
+};
+
+var setPlayerAvatar = function () {
+  playerCharacterImage = avatar[ playerCharacter ];
+
+};
+
+var selectRandomWinnerText = function () {
+  var winnerCharacter = characters[ playerCharacter ];
+  var winnerImgTxtLength = winnerCharacter.winning_images.length;
+  var luckyWinnerChoice = Math.floor( Math.random() * winnerImgTxtLength );
+
+  winnerImg = "images/" + winnerCharacter.winning_images[ luckyWinnerChoice ];
+  winnerMessage = winnerCharacter.winning_text[ luckyWinnerChoice ];
+
 }
 
 
 // ------------- Release the Kraken ---------------
 
 // Set the event listener to the box
-characterSelected();
+$( ".character_box.user" ).on( "click", function () {
+
+  if ( characterSelected() ) {
+    $( ".character_box.user" ).attr( "isselected", "false" );
+    $( ".character_box.user" ).css( "border", "0px" );
+  }
+
+  $( this ).attr( "isselected", "true" );
+  $( this ).css({
+    border: "2px solid rgba(81, 203, 238, 0.7)",
+    borderRadius: "8px"
+  });
+
+});
+
 $( ".box" ).on( "click", init );

@@ -24,7 +24,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  text-align: center;
 }
 
 .show_winner_msg {
@@ -66,6 +66,10 @@ h1 {
   margin: auto 45px;
 }
 
+.trump_clinton {
+  width: 200px;
+  height: 250px;
+}
 .character {
   width: 220px;
   height: 330px;
@@ -89,5 +93,6 @@ h1 {
   height: 100%;
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid salmon;
+  /*border: 1px solid salmon;*/
+  box-sizing: border-box;
 }
