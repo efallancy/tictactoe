@@ -1,19 +1,12 @@
-# First Level Heading
-## Second Level Heading
-### Third Level Heading
+# Tic Tac Pants of Tic Tac Toe
+It's a tic tac toe game with the options to choose on which character the player would prefer and battle against the computer.
 
-Plain text just like this
+Upon winning, there shall be a winner message shown. Well, if losing, of course there shall be _motivational message_.
 
-For link, do this
-[i suppose this is description]( website link ).
-
-Italic text _to the text_.
-
-For bold, we use **two asterik**.
-
-For strikethrough, use tilde ~yes it is done like this~
-
-For list, use dash
-- Item one
- - Child Item one
-- Etc.
+## The Characters
+- _Spongebob_
+- _Patrick_
+- _Mr. Krab_
+- _Jerry_
+- _Squidward_
+- _Plankton_
