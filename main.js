@@ -1,7 +1,5 @@
 console.log( "Tic tac toe" );
 
-// $( "#board" ).parallax();
-
 const user = "User";
 const opponent = "Opponent";
 
@@ -19,9 +17,6 @@ var loserImg = "";
 var loserMessage = "";
 var winnerImg = "";
 var winnerMessage = "";
-
-// TODO: create functionality to choose character
-// TODO: if time allows, create another AI
 
 var avatar = {
   spongebob: "spongebob.png",
@@ -97,6 +92,7 @@ var setPlayerClickResponse = function ( event, currentElement ) {
 
 };
 
+// Do the player action
 var playerAction = function ( currentElement ) {
   var $element = $( currentElement );
 
@@ -111,21 +107,26 @@ var playerAction = function ( currentElement ) {
   // Set to notify who clicked it
   $element.attr( "player", user );
 
+  // Check for the winner
   showWinner();
 
 };
 
+// The computer action
 var computerAction = function () {
   if ( hasWinner ) { return }
   var boxes = $( ".box" );
   var potentialBoxes = [];
 
+  // Get the boxes which are not yet being clicked or selected
   for ( var i = 0; i < boxes.length; i++ ) {
     if ( boxes.eq( i ).attr( "isclick" ) === "false" ) {
       potentialBoxes.push( boxes.eq( i ) );
     }
   }
 
+  // If there is some unclick boxes, then perform the computer action to select the box
+  // Checking the available boxes not being clicked is just a fail safe action.
   if ( potentialBoxes.length > 0 ) {
     var luckyNumber = Math.floor( Math.random() * potentialBoxes.length );
 
@@ -134,7 +135,7 @@ var computerAction = function () {
     // Set to notify already clicked
     $computerBox.attr( "isclick", "true" );
 
-    console.log( opponentCharacterImage );
+    // Set the image on the box to indicate the computer has already clicked
     $computerBox.css( {
       backgroundImage: "url( images/" + opponentCharacterImage + " )",
       backgroundSize: "cover"
@@ -143,11 +144,14 @@ var computerAction = function () {
     // Set to notify who clicked it
     $computerBox.attr( "player", opponent );
 
+    // Change the current state of the user
     currentPlayer = user;
 
+    // Check the winner
     showWinner();
   }
   else {
+    // Well if no boxes left and no winner, this is for sure a DRAW!
     isDraw = true;
     showDraw();
   }
@@ -156,6 +160,7 @@ var computerAction = function () {
 
 // ------------- Triggers ---------------
 
+// Initialization
 var init = function () {
 
   if ( characterSelected() ) {
@@ -182,11 +187,17 @@ var init = function () {
     // Select the loser text and images
     selectRandomLoserText();
 
+    // Set the click response
     setClickResponse( event, this );
   }
   else {
     // Alert to select character
-    alert( "Please select the character of your choice" );
+    
+    swal(
+          'Player?',
+          'Please select your character',
+          'warning'
+        );
   }
 
 };
@@ -306,6 +317,7 @@ var showWinner = function () {
   }
 };
 
+// Show the draw message
 var showDraw = function () {
   imgDisplay = "images/pineapple_house.jpg";
 
@@ -313,6 +325,8 @@ var showDraw = function () {
   displayBillboard( imgDisplay, "" );
 };
 
+
+// This is used to display the winning, losing and draw message
 var displayBillboard = function ( imgDisplay, msgDisplay ) {
   $( "#showcase" ).attr( "src", imgDisplay );
   $( "#winner_msg" ).html( msgDisplay );
@@ -351,6 +365,8 @@ var resetGame = function () {
 };
 
 // ------------- Select character -----------------
+
+// Check if the character already selected
 var characterSelected = function () {
   var selected = false;
 
@@ -367,6 +383,7 @@ var characterSelected = function () {
   return selected;
 };
 
+// Get the selected character
 var getSelectedCharacter = function () {
   var potentialCharacter = $( ".character_box.user" );
   var character = "";
@@ -380,6 +397,7 @@ var getSelectedCharacter = function () {
   return character;
 };
 
+// Set the loser message
 var selectRandomLoserText = function () {
   var loserImgTxtLength = loser.loser_images.length;
   var luckyLoser = Math.floor( Math.random() * loserImgTxtLength );
@@ -389,11 +407,13 @@ var selectRandomLoserText = function () {
 
 };
 
+// Set the player's avatar
 var setPlayerAvatar = function () {
   playerCharacterImage = avatar[ playerCharacter ];
 
 };
 
+// Set the winner message
 var selectRandomWinnerText = function () {
   var winnerCharacter = characters[ playerCharacter ];
   var winnerImgTxtLength = winnerCharacter.winning_images.length;
@@ -407,7 +427,7 @@ var selectRandomWinnerText = function () {
 
 // ------------- Release the Kraken ---------------
 
-// Set the event listener to the box
+// Set the event listener to the character box
 $( ".character_box.user" ).on( "click", function () {
 
   if ( characterSelected() ) {
@@ -423,4 +443,5 @@ $( ".character_box.user" ).on( "click", function () {
 
 });
 
+// Set the event listener to the box
 $( ".box" ).on( "click", init );
