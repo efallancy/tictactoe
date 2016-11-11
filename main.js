@@ -192,9 +192,9 @@ var init = function () {
   }
   else {
     // Alert to select character
-    
+
     swal(
-          'Player?',
+          'Player',
           'Please select your character',
           'warning'
         );
